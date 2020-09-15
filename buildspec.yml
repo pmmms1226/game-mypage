@@ -99,22 +99,27 @@ phases:
                         cpu: 500m
                       limits:
                         cpu: 800m
-                    env:
+                  - env:
                     - name: DB_URL
-                    valueFrom:
-                      configMapKeyRef:
-                        name: teamb-config
-                        key: DB_URL
+                      valueFrom:
+                        configMapKeyRef:
+                          name: mariadb-config
+                          key: DB_URL
                     - name: DB_USER
-                    valueFrom:
-                      configMapKeyRef:
-                        name: teamb-config
-                        key: DB_USER
+                      valueFrom:
+                        configMapKeyRef:
+                          name: mariadb-config
+                          key: DB_USER
                     - name: DB_PASSWORD
-                    valueFrom:
-                      configMapKeyRef:
-                        name: teamb-config
-                        key: DB_PASSWORD
+                      valueFrom:
+                        configMapKeyRef:
+                          name: mariadb-config
+                          key: DB_PASSWORD
+                    - name: DB_NAME
+                      valueFrom:
+                       configMapKeyRef:
+                          name: mariadb-config
+                         key: DB_NAME
                     volumeMounts:
                     - mountPath: "/mnt/aws"
                       name: volume
