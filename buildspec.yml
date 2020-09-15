@@ -96,11 +96,25 @@ phases:
                       failureThreshold: 5
                     resources:
                       requests:
-                        cpu: 100m
-                        memory: 128Mi
+                        cpu: 500m
                       limits:
-                        cpu: 250m
-                        memory: 256Mi
+                        cpu: 800m
+                    env:
+                    - name: DB_URL
+                    valueFrom:
+                      configMapKeyRef:
+                        name: teamb-config
+                        key: DB_URL
+                    - name: DB_USER
+                    valueFrom:
+                      configMapKeyRef:
+                        name: teamb-config
+                        key: DB_USER
+                    - name: DB_PASSWORD
+                    valueFrom:
+                      configMapKeyRef:
+                        name: teamb-config
+                        key: DB_PASSWORD
                     volumeMounts:
                     - mountPath: "/mnt/aws"
                       name: volume
