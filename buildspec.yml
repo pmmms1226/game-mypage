@@ -98,7 +98,7 @@ phases:
                       requests:
                         cpu: 500m
                       limits:
-                        cpu: 800m
+                        cpu: 900m
                     env:
                     - name: DB_URL
                     valueFrom:
