@@ -20,7 +20,16 @@ public class Mypage {
     private Long rewardId;
     @Column(name="rewardStatus")
     private String rewardStatus;
+    @Column
+    private Long kakaotalkId;
 
+    public Long getKakaotalkId() {
+        return kakaotalkId;
+    }
+
+    public void setKakaotalkId(Long kakaotalkId) {
+        this.kakaotalkId = kakaotalkId;
+    }
 
     public Long getId() {
         return id;

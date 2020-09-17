@@ -33,6 +33,21 @@ public class MypageViewHandler {
             e.printStackTrace();
         }
     }
+    @StreamListener(KafkaProcessor.INPUT)
+    public void whenMissionUpdated_then_CREATE_2 (@Payload MissionUpdated missionUpdated) {
+        try {
+            if (missionUpdated.isMe()) {
+                // view 객체 생성
+                Mypage mypage = new Mypage();
+                // view 객체에 이벤트의 Value 를 set 함
+                mypage.setKakaotalkId(missionUpdated.getId());
+                // view 레파지 토리에 save
+                mypageRepository.save(mypage);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
     /*
     @StreamListener(KafkaProcessor.INPUT)
     public void whenAllocated_then_CREATE_2 (@Payload Allocated allocated) {
@@ -111,6 +126,24 @@ public class MypageViewHandler {
                 for(Mypage mypage : mypageList){
                     // view 객체에 이벤트의 eventDirectValue 를 set 함
                     mypage.setRewardStatus(exchanged.getStatus());
+                    // view 레파지 토리에 save
+                    mypageRepository.save(mypage);
+                }
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    @StreamListener(KafkaProcessor.INPUT)
+    public void whenMissionUpdated_then_UPDATE_4(@Payload MissionUpdated missionUpdated) {
+        try {
+            if (missionUpdated.isMe()) {
+                // view 객체 조회
+                List<Mypage> mypageList = mypageRepository.findByKakaotalkId(missionUpdated.getId());
+                for(Mypage mypage : mypageList){
+                    // view 객체에 이벤트의 eventDirectValue 를 set 함
+                    mypage.setKakaotalkId(missionUpdated.getId());
                     // view 레파지 토리에 save
                     mypageRepository.save(mypage);
                 }
